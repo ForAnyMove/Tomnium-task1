@@ -4,7 +4,7 @@ import {RendOfJson} from './components/RendOfJson';
 
 export default function App() {
   return (
-    <div className="App">
+    <div className="app">
       <RendOfJson/>
     </div>
   );

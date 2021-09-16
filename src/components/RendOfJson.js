@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import data from '../info/data.json';
-
+import Loader from './Loader';
 // console.log(Object.entries(data));
 
 let result = [];
@@ -41,9 +41,9 @@ export function RendOfJson() {
   }
   allRender();
   return res !== null ?
-      <ul>
+      <ul className='ul-list'>
         {listItems} 
       </ul>
-      : <p>Loading...</p>
+      : <Loader/>
 }
 
