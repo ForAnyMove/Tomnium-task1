@@ -1,27 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import data from '../info/data.json';
 
-// console.log(Object.values(data)[3]);
-// console.log(Object.keys(data));
-console.log(Object.entries(data));
-const arrOfJson = Object.entries(data);
+// console.log(Object.entries(data));
+
 let result = [];
-function allRender(){
-  for (let index = 0; index < arrOfJson.length; index++) {
-    const element = arrOfJson[index];
-    result[index] = element[0] + ' : ' + element[1]
+let listItems;
+const allRender = () => {
+  const prom = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const arrOfJson = Object.entries(data);
+      resolve(arrOfJson)
+    }, 2000)
+  })
+  prom.then(arrOfJson => {
+    for (let index = 0; index < arrOfJson.length; index++) {
+      const element = arrOfJson[index];
+      if (typeof element[1] === 'object' && element[1] !== null) {
+        const subArr = Object.entries(element[1])
+        for (let i = 0; i < subArr.length; i++) {
+          const element2 = subArr[i];
+          result[index] = element[0] + ' : ' + element2[0] + ' : ' + element2[1]
+          index++
+        }
+      } else
+        result[index] = element[0] + ' : ' + element[1]
+    }
+    listItems = result.map((result) =>
+      <li>{result}</li>
+    )
   }
-  return  (
-   <div>
-     {result}
-   </div>
-   )
+  )
 }
-console.log(result)
-export function RendOfJson() { 
+// allRender()
+
+// console.log(result)
+export function RendOfJson() {
+  allRender()
   return (
     <div className="rend-of">
-      {allRender()}
+      <ul>
+        {listItems}
+      </ul>
     </div>
   );
 }
