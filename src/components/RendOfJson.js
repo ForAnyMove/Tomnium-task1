@@ -37,7 +37,7 @@ export function RendOfJson() {
       }
       listItems = result.map((result) =>
         (typeof result[1] === 'object' && result[1] !== null) ?
-          <li key={result}>{result[0]}<ul>{result[1].map((r) => <li key={r}>{r}</li>)}</ul></li>
+          <li key={result}>{result[0]}:<ul className='ul-list'>{result[1].map((r) => <li key={r}>{r}</li>)}</ul></li>
           :
           <li key={result}>{result}</li>
       )
@@ -50,7 +50,7 @@ export function RendOfJson() {
     listItems = result.map((result) =>
       !litab ?
       (typeof result[1] === 'object' && result[1] !== null) ?
-      <li key={result}>{result[0]}<ul>{result[1].map((r) => <li key={r}>{r}</li>)}</ul></li>
+      <li key={result}>{result[0]}:<ul className='ul-list'>{result[1].map((r) => <li key={r}>{r}</li>)}</ul></li>
       :
       <li key={result}>{result}</li>
         :
@@ -59,7 +59,7 @@ export function RendOfJson() {
             <td>
               {result[0]}
             </td>
-            {result[1].map((r) => <tr><td key={r}>{r.split(':')[0]}</td><td>{r.split(':')[1]}</td></tr>)}
+            {result[1].map((r) => <tr className='other-tr'><td key={r}>{r.split(':')[0]}</td><td>{r.split(':')[1]}</td></tr>)}
           </tr>
           :
           <tr key={result}>
@@ -71,10 +71,10 @@ export function RendOfJson() {
   }
   allRender();
   return (res !== null) ?
-    <div>
-      <button onClick={() => { switchFunc() }}>Switch to {litab ? 'table' : 'list'}</button>
+    <div className='result-block'>
+      <button className='switch-button' onClick={() => { switchFunc() }}><h3>Switch to {litab ? 'table' : 'list'}</h3></button>
       {litab ?
-        <ul className='ul-list'>
+        <ul className='ul-list main-list'>
           {listItems}
         </ul>
         :
